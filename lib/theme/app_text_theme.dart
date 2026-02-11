@@ -12,15 +12,15 @@ const headline1 = TextStyle(
 
 const headline2 = TextStyle(
   fontFamily: _montserrat,
-  fontWeight: FontWeight.w400,
-  fontSize: 40,
+  fontWeight: FontWeight.w900,
+  fontSize: 30,
   fontStyle: FontStyle.normal,
 );
 
 const headline3 = TextStyle(
   fontFamily: _montserrat,
-  fontWeight: FontWeight.w300,
-  fontSize: 20,
+  fontWeight: FontWeight.w400,
+  fontSize: 16,
   fontStyle: FontStyle.normal,
 );
 // const _nunitoSans = 'Nunito Sans';

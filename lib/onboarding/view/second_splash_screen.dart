@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'package:subscribtion_reminder/onboarding/view/second_splash_screen.dart';
 import 'package:subscribtion_reminder/theme/app_colors.dart';
 import 'package:subscribtion_reminder/theme/app_text_theme.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({super.key});
+class SecondSplashScreen extends StatefulWidget {
+  const SecondSplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  State<SecondSplashScreen> createState() => _SecondSplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
-  final PageController _controller = PageController();
+class _SecondSplashScreenState extends State<SecondSplashScreen> {
+  final PageController _controller = PageController(initialPage: 2);
 
   @override
   void dispose() {
@@ -54,6 +53,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Icon(Icons.arrow_back_outlined),
         backgroundColor: Colors.transparent,
         actions: [
           Padding(
@@ -70,27 +70,15 @@ class _SplashScreenState extends State<SplashScreen> {
 
       body: Column(
         children: [
-          /// 🌊 CAROUSEL
+          /// CAROUSEL
           Expanded(
             child: PageView(
               controller: _controller,
               children: [
                 buildPage(
-                  'Track Everything',
-                  'All your subscriptions in one organized place.',
-                  "assets/img/splash1.png",
-                ),
-
-                buildPage(
-                  'Never Miss Payments',
-                  'Get notified before your bills arrive.',
+                  'Never Miss a Renewal',
+                  'Get notified before your next \n payment is due.',
                   "assets/img/splash2.png",
-                ),
-
-                buildPage(
-                  'Stay In Control',
-                  'Know exactly where your money goes.',
-                  "assets/img/splash3.png",
                 ),
               ],
             ),
@@ -114,32 +102,23 @@ class _SplashScreenState extends State<SplashScreen> {
           /// 🚀 NEXT BUTTON
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => SecondSplashScreen()),
-                );
-              },
-              child: Container(
-                width: double.infinity,
-                height: 70,
-                decoration: BoxDecoration(
-                  color: AppColors.secondary,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: const Center(
-                  child: Text(
-                    'Next',
-                    style: TextStyle(color: Colors.white, fontSize: 20),
-                  ),
+            child: Container(
+              width: double.infinity,
+              height: 70,
+              decoration: BoxDecoration(
+                color: AppColors.secondary,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: const Center(
+                child: Text(
+                  'Next',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
                 ),
               ),
             ),
           ),
 
           const SizedBox(height: 40),
-          
         ],
       ),
     );

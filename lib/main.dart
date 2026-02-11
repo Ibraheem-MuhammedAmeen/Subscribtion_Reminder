@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:subscribtion_reminder/onboarding/view/second_splash_screen.dart';
 import 'package:subscribtion_reminder/onboarding/view/splash_screen.dart';
 import 'package:subscribtion_reminder/theme/app_theme.dart';
 
@@ -14,10 +15,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      darkTheme: darkTheme,
+
       themeMode: ThemeMode.light,
       theme: lightTheme,
-      home:  SplashScreen(),
+      darkTheme: darkTheme,
+      home: const SplashScreen(),
     );
   }
 }
