@@ -1,0 +1,157 @@
+import 'package:flutter/material.dart';
+
+// Montserrat Text Styles
+const String _montserrat = 'Montserrat';
+
+const headline1 = TextStyle(
+  fontFamily: _montserrat,
+  fontWeight: FontWeight.w500,
+
+  fontStyle: FontStyle.italic,
+);
+
+const headline2 = TextStyle(
+  fontFamily: _montserrat,
+  fontWeight: FontWeight.w400,
+  fontSize: 40,
+  fontStyle: FontStyle.normal,
+);
+
+const headline3 = TextStyle(
+  fontFamily: _montserrat,
+  fontWeight: FontWeight.w300,
+  fontSize: 20,
+  fontStyle: FontStyle.normal,
+);
+// const _nunitoSans = 'Nunito Sans';
+// const _gelasio = 'Gelasio';
+// const _merriweather = 'Merriweather';
+
+// const _largeTitleStyle = TextStyle(
+//   fontSize: 30,
+//   fontWeight: FontWeight.bold,
+//   height: 1.34,
+// );
+
+// const _mediumTitleStyle = TextStyle(
+//   fontSize: 24,
+//   fontWeight: FontWeight.w700,
+//   height: 1.34,
+// );
+
+// const _smallTitleStyle = TextStyle(
+//   fontSize: 18,
+//   fontWeight: FontWeight.bold,
+//   height: 1.34,
+// );
+
+// const _bodyTextStyle = TextStyle(
+//   fontSize: 18,
+//   fontWeight: FontWeight.normal,
+//   color: AppColors.textSecondary,
+// );
+
+// const _captionTextStyle = TextStyle(
+//   fontSize: 14,
+//   fontWeight: FontWeight.w500,
+//   color: AppColors.textPrimary,
+// );
+
+// const _buttonStyle = TextStyle(fontSize: 18, fontWeight: FontWeight.bold);
+
+// const kTextButtonStyle = TextStyle(
+//   fontFamily: _nunitoSans,
+//   fontSize: 20,
+//   color: AppColors.textOnPrimary,
+// );
+
+// final kContainedButtonStyle = _buttonStyle.copyWith(
+//   color: AppColors.textOnPrimary,
+//   fontFamily: _gelasio,
+// );
+
+// final kButtonStyle = _buttonStyle.copyWith(
+//   color: AppColors.textPrimary,
+//   fontFamily: _gelasio,
+// );
+
+// final kBlackGelasioLargeTitleStyle = _largeTitleStyle.copyWith(
+//   fontFamily: _gelasio,
+//   color: AppColors.textPrimary,
+//   fontSize: 30,
+//   fontWeight: FontWeight.bold,
+// );
+
+// final kBlackNunitoLargeTitleStyle = _largeTitleStyle.copyWith(
+//   color: AppColors.textPrimary,
+//   fontFamily: _nunitoSans,
+// );
+
+// final kBlackNunitoMediumTitleStyle = _mediumTitleStyle.copyWith(
+//   color: AppColors.textPrimary,
+//   fontFamily: _nunitoSans,
+// );
+
+// final kGreyGelasioLargeTitleStyle = _largeTitleStyle.copyWith(
+//   fontFamily: _gelasio,
+//   fontSize: 35,
+//   color: AppColors.graniteGrey,
+//   fontWeight: FontWeight.w500,
+// );
+
+// final kGreyGelasioMediumTitleStyle = _mediumTitleStyle.copyWith(
+//   fontFamily: _gelasio,
+//   color: AppColors.graniteGrey,
+//   fontSize: 24,
+//   letterSpacing: 0.5,
+//   fontWeight: FontWeight.w600,
+// );
+
+// final kBlackGelasioMediumTitleStyle = _mediumTitleStyle.copyWith(
+//   color: AppColors.textPrimary,
+//   fontFamily: _gelasio,
+// );
+
+// final kBlackMerriweatherMediumTitleStyle = _mediumTitleStyle.copyWith(
+//   color: AppColors.textPrimary,
+//   fontFamily: _merriweather,
+// );
+
+// final kBlackMerriweatherSmallTitleStyle = _smallTitleStyle.copyWith(
+//   color: AppColors.textPrimary,
+//   fontFamily: _merriweather,
+// );
+
+// final kWhiteMerriweatherSmallTitleStyle = _smallTitleStyle.copyWith(
+//   color: AppColors.textPrimary,
+//   fontFamily: _merriweather,
+// );
+
+// final kGrayNunitoHeight2TextStyle = _bodyTextStyle.copyWith(
+//   fontFamily: _nunitoSans,
+//   color: AppColors.grey,
+//   height: 2,
+// );
+
+// final kBodyNunitoTextStyle = _bodyTextStyle.copyWith(
+//   fontFamily: _nunitoSans,
+//   fontSize: 14,
+// );
+
+// final kBlackNunitoSmallTitleStyle = _smallTitleStyle.copyWith(
+//   fontFamily: _nunitoSans,
+// );
+
+// final kGreyNunitoSmallTitleStyle = _smallTitleStyle.copyWith(
+//   fontFamily: _nunitoSans,
+//   color: AppColors.grey,
+// );
+
+// final kGreyNunitoMediumTitleStyle = _mediumTitleStyle.copyWith(
+//   fontFamily: _nunitoSans,
+//   color: AppColors.grey,
+// );
+
+// final kCaptionNunitoTextStyle = _captionTextStyle.copyWith(
+//   fontFamily: _nunitoSans,
+// );
