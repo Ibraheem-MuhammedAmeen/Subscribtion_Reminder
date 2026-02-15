@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:subscribtion_reminder/onboarding/widget/build_page.dart';
 import 'package:subscribtion_reminder/theme/app_colors.dart';
-import 'package:subscribtion_reminder/theme/app_text_theme.dart';
 
 class SecondSplashScreen extends StatefulWidget {
   const SecondSplashScreen({super.key});
@@ -17,36 +17,6 @@ class _SecondSplashScreenState extends State<SecondSplashScreen> {
   void dispose() {
     _controller.dispose();
     super.dispose();
-  }
-
-  Widget buildPage(String title, String subtitle, String image) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 30),
-      child: Column(
-        children: [
-          Text(title, style: headline2),
-
-          const SizedBox(height: 15),
-
-          Text(subtitle, style: headline3, textAlign: TextAlign.center),
-
-          const SizedBox(height: 60),
-
-          Container(
-            height: MediaQuery.of(context).size.height * 0.45,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(color: Colors.grey.withOpacity(0.4), blurRadius: 6),
-              ],
-              color: const Color(0XFFF6F9FC),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Center(child: Image.asset(image)),
-          ),
-        ],
-      ),
-    );
   }
 
   @override
@@ -75,11 +45,8 @@ class _SecondSplashScreenState extends State<SecondSplashScreen> {
             child: PageView(
               controller: _controller,
               children: [
-                buildPage(
-                  'Never Miss a Renewal',
-                  'Get notified before your next \n payment is due.',
-                  "assets/img/splash2.png",
-                ),
+                buildPage('Never Miss a Renewal','Get notified before your next \n payment is due.', "assets/img/splash2.png", context),
+                
               ],
             ),
           ),

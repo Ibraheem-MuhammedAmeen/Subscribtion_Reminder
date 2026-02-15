@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:subscribtion_reminder/onboarding/view/second_splash_screen.dart';
 import 'package:subscribtion_reminder/onboarding/view/splash_screen.dart';
 import 'package:subscribtion_reminder/theme/app_theme.dart';
 
