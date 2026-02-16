@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:subscribtion_reminder/onboarding/view/splash_screen.dart';
+import 'package:subscribtion_reminder/onboarding/view/onboarding.dart';
 import 'package:subscribtion_reminder/theme/app_theme.dart';
 
 void main() {
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeMode.light,
       theme: lightTheme,
       darkTheme: darkTheme,
-      home: const SplashScreen(),
+      home: const OnboardingScreen(),
     );
   }
 }
