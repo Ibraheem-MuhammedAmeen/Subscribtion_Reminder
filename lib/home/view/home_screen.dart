@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:subscribtion_reminder/add_subscription/view/add_subscription.dart';
-import 'package:subscribtion_reminder/theme/app_text_theme.dart';
+import 'package:subscribtion_reminder/core/theme/app_text_theme.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

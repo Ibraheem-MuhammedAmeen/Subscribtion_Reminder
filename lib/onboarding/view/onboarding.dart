@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:subscribtion_reminder/core/widgets/button.dart';
 import 'package:subscribtion_reminder/nav_bar/view/nav_.dart';
 
-import 'package:subscribtion_reminder/theme/app_colors.dart';
-import 'package:subscribtion_reminder/theme/app_text_theme.dart';
+import 'package:subscribtion_reminder/core/theme/app_colors.dart';
+import 'package:subscribtion_reminder/core/theme/app_text_theme.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -42,7 +43,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
       body: Column(
         children: [
-          /// 🌊 CAROUSEL
+          ///  CAROUSEL
           Expanded(
             child: PageView(
               controller: _controller,
@@ -85,41 +86,18 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           ),
 
           const SizedBox(height: 30),
-
-          /// 🚀 NEXT BUTTON
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                 
-                  MaterialPageRoute(builder: (context) => const MainScreen()),
-                );
-              },
-              child: Container(
-                width: double.infinity,
-                height: 70,
-                decoration: BoxDecoration(
-                  color: AppColors.secondary,
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: const Center(
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                        'Get Started',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
-                      ),
-                      SizedBox(width: 8),
-                      Icon(Icons.arrow_forward, color: Colors.white),
-                    ],
-                  ),
-                ),
-              ),
-            ),
+          Button(
+            title: 'Get Started',
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const MainScreen()),
+              );
+            },
+            color: AppColors.secondary,
           ),
+
+          
 
           const SizedBox(height: 40),
         ],
