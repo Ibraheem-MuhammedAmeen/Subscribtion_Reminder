@@ -13,7 +13,7 @@ const headline1 = TextStyle(
 const headline2 = TextStyle(
   fontFamily: _montserrat,
   fontWeight: FontWeight.w900,
-  fontSize: 30,
+  fontSize: 25,
   fontStyle: FontStyle.normal,
 );
 
@@ -30,7 +30,6 @@ const headline4 = TextStyle(
   fontSize: 25,
   fontStyle: FontStyle.normal,
 );
-
 
 const smallsubtext = TextStyle(
   fontFamily: _montserrat,

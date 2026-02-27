@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:subscribtion_reminder/core/widgets/button.dart';
-import 'package:subscribtion_reminder/nav_bar/view/nav_.dart';
+import 'package:subscribtion_reminder/features/nav_bar/view/nav_.dart';
 
 import 'package:subscribtion_reminder/core/theme/app_colors.dart';
 import 'package:subscribtion_reminder/core/theme/app_text_theme.dart';
@@ -32,9 +32,17 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
           Padding(
             padding: const EdgeInsets.only(left: 16, right: 15),
             child: Center(
-              child: Text(
-                'Skip',
-                style: TextStyle(fontSize: 20, color: AppColors.secondary),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MainScreen()),
+                  );
+                },
+                child: Text(
+                  'Skip',
+                  style: TextStyle(fontSize: 20, color: AppColors.secondary),
+                ),
               ),
             ),
           ),
@@ -97,8 +105,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             color: AppColors.secondary,
           ),
 
-          
-
           const SizedBox(height: 40),
         ],
       ),
@@ -124,17 +130,19 @@ Widget buildPage(
 
         const SizedBox(height: 60),
 
-        Container(
-          height: MediaQuery.of(context).size.height * 0.45,
-          width: double.infinity,
-          decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(color: Colors.grey.withOpacity(0.4), blurRadius: 6),
-            ],
-            color: const Color(0XFFF6F9FC),
-            borderRadius: BorderRadius.circular(20),
+        Expanded(
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.45,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(color: Colors.grey.withOpacity(0.4), blurRadius: 6),
+              ],
+              color: const Color(0XFFF6F9FC),
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Center(child: Image.asset(image, fit: BoxFit.contain)),
           ),
-          child: Center(child: Image.asset(image)),
         ),
       ],
     ),
@@ -158,10 +166,12 @@ Widget buildPageTwo(
         Text(subtitle, style: headline3, textAlign: TextAlign.center),
 
         const SizedBox(height: 60),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.45,
-          width: double.infinity,
-          child: Center(child: Image.asset(image)),
+        Expanded(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.45,
+            width: double.infinity,
+            child: Center(child: Image.asset(image, fit: BoxFit.contain)),
+          ),
         ),
       ],
     ),
@@ -182,10 +192,12 @@ Widget buildPageThree(
       children: [
         const SizedBox(height: 30),
 
-        SizedBox(
-          height: MediaQuery.of(context).size.height * 0.36,
-          width: double.infinity,
-          child: Image.asset(image, fit: BoxFit.contain),
+        Expanded(
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.36,
+            width: double.infinity,
+            child: Center(child: Image.asset(image, fit: BoxFit.contain)),
+          ),
         ),
 
         const SizedBox(height: 30),

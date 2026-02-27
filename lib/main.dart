@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:subscribtion_reminder/onboarding/view/onboarding.dart';
+import 'package:subscribtion_reminder/features/onboarding/view/onboarding.dart';
 import 'package:subscribtion_reminder/core/theme/app_theme.dart';
 
 void main() {

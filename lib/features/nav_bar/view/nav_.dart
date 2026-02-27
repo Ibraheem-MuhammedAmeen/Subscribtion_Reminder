@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-import 'package:subscribtion_reminder/home/view/home_screen.dart';
+import 'package:subscribtion_reminder/features/home/view/home_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -42,7 +42,7 @@ class _MainScreenState extends State<MainScreen> {
               gap: 8,
               activeColor: Colors.blue,
               iconSize: 24,
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 12),
               duration: const Duration(milliseconds: 400),
               tabBackgroundColor: Colors.blue.withOpacity(0.1),
               color: Colors.grey,

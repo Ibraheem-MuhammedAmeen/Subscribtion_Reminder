@@ -401,7 +401,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                 ),
 
                 Container(
-                  height: 60,
+                  height: 50,
                   width: double.infinity,
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 4, 0, 255),
@@ -410,7 +410,7 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
                   child: Center(
                     child: Text(
                       'Save Subscription',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      style: TextStyle(color: Colors.white, fontSize: 15),
                       textAlign: TextAlign.center,
                     ),
                   ),
