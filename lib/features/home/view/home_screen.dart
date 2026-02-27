@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:subscribtion_reminder/features/add_subscription/view/add_subscription.dart';
+import 'package:subscribtion_reminder/features/subscription_func/view/add_subscription.dart';
 import 'package:subscribtion_reminder/core/theme/app_text_theme.dart';
 
 class HomeScreen extends StatelessWidget {
