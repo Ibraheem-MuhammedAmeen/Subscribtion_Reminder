@@ -9,7 +9,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Supabase.initialize(
     url: "https://xgednzkczcqoyihzzpll.supabase.co",
-    anonKey: '"sb_publishable_3oim2FmEVWw0nfT5zVwr5Q_dCJ-DhPc"',
+    anonKey: "sb_publishable_3oim2FmEVWw0nfT5zVwr5Q_dCJ-DhPc",
   );
   runApp(const MyApp());
 }
@@ -20,19 +20,20 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    MultiProvider(
+    return MultiProvider(
       providers: [
         // auth provider
         ChangeNotifierProvider(create: (context) => SubscriptionProvider()),
       ],
-    );
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
 
-      themeMode: ThemeMode.light,
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      home: const OnboardingScreen(),
+      child: MaterialApp(
+        // This is now a child of the provider
+        debugShowCheckedModeBanner: false,
+        themeMode: ThemeMode.light,
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        home: const OnboardingScreen(),
+      ),
     );
   }
 }
