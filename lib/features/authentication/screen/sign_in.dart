@@ -4,6 +4,7 @@ import 'package:subscribtion_reminder/core/theme/app_text_theme.dart';
 import 'package:subscribtion_reminder/core/utils/text_validations.dart';
 import 'package:subscribtion_reminder/core/widgets/app_textfield.dart';
 import 'package:subscribtion_reminder/core/widgets/social_auth_button.dart';
+import 'package:subscribtion_reminder/features/authentication/screen/sign_up.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -160,15 +161,23 @@ class _SignInState extends State<SignIn> {
                   ),
                 ),
                 SizedBox(height: 10),
-                Text(
-                  "Sign Up",
-                  style: TextStyle(
-                    color: const Color.fromARGB(255, 4, 0, 255),
-                    fontSize: 25,
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w500,
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const SignUp()),
+                    );
+                  },
+                  child: Text(
+                    "Sign Up",
+                    style: TextStyle(
+                      color: const Color.fromARGB(255, 4, 0, 255),
+                      fontSize: 25,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w500,
 
-                    fontStyle: FontStyle.normal,
+                      fontStyle: FontStyle.normal,
+                    ),
                   ),
                 ),
                 SizedBox(height: 20),
