@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:subscribtion_reminder/core/theme/app_text_theme.dart';
 import 'package:subscribtion_reminder/core/utils/text_validations.dart';
 import 'package:subscribtion_reminder/core/widgets/app_textfield.dart';
+import 'package:subscribtion_reminder/core/widgets/social_auth_button.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -19,8 +20,8 @@ class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0XFFF4F6FA),
-      body: GestureDetector(
+      backgroundColor: const Color.fromARGB(255, 237, 240, 246),
+      body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(20),
           child: SafeArea(
@@ -29,9 +30,19 @@ class _SignUpState extends State<SignUp> {
               // crossAxisAlignment: CrossAxisAlignment.center,
               // mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Image.asset('assets/img/calender.png', height: 300),
-                Text('Login', style: headline2),
-                SizedBox(height: 20),
+                Container(
+                  height: 110,
+                  width: 140,
+                  decoration: BoxDecoration(
+                    color: const Color(0XFFFEFEFE),
+                    borderRadius: BorderRadius.all(Radius.circular(25)),
+                  ),
+                  child: Image.asset('assets/img/calendar.png', height: 110),
+                ),
+
+                SizedBox(height: 10),
+                Text('Sign Up', style: headline2),
+                SizedBox(height: 15),
                 Container(
                   decoration: BoxDecoration(
                     color: Color(0XFFFEFEFE),
@@ -137,28 +148,67 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 SizedBox(height: 20),
-                Text(
-                  "Don't have an account?",
-                  style: TextStyle(
-                    color: const Color.fromARGB(255, 0, 0, 0),
-                    fontSize: 15,
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w400,
+                RichText(
+                  text: TextSpan(
+                    text: "Already have an account? ",
+                    style: TextStyle(
+                      color: const Color.fromARGB(255, 0, 0, 0),
+                      fontSize: 15,
+                      fontFamily: 'Montserrat',
+                      fontWeight: FontWeight.w400,
 
-                    fontStyle: FontStyle.normal,
+                      fontStyle: FontStyle.normal,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: "Sign In",
+                        style: TextStyle(
+                          color: const Color.fromARGB(255, 4, 0, 255),
+                          fontSize: 15,
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.w400,
+
+                          fontStyle: FontStyle.normal,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-                SizedBox(height: 10),
-                Text(
-                  "Sign Up",
-                  style: TextStyle(
-                    color: const Color.fromARGB(255, 4, 0, 255),
-                    fontSize: 25,
-                    fontFamily: 'Montserrat',
-                    fontWeight: FontWeight.w500,
+                // Text(
+                //   "Don't have an account?",
+                //   style: TextStyle(
+                //     color: const Color.fromARGB(255, 0, 0, 0),
+                //     fontSize: 15,
+                //     fontFamily: 'Montserrat',
+                //     fontWeight: FontWeight.w400,
 
-                    fontStyle: FontStyle.normal,
-                  ),
+                //     fontStyle: FontStyle.normal,
+                //   ),
+                // ),
+                // SizedBox(height: 10),
+                // Text(
+                //   "Sign Up",
+                //   style: TextStyle(
+                //     color: const Color.fromARGB(255, 4, 0, 255),
+                //     fontSize: 25,
+                //     fontFamily: 'Montserrat',
+                //     fontWeight: FontWeight.w500,
+
+                //     fontStyle: FontStyle.normal,
+                //   ),
+                // ),
+                SizedBox(height: 20),
+
+                socialAuthButton(
+                  text: "Continue with Google",
+                  imagePath: 'assets/icons/google.png',
+                  onPressed: () {},
+                ),
+                SizedBox(height: 15),
+                socialAuthButton(
+                  text: "Continue with Apple",
+                  imagePath: 'assets/icons/apple-logo.png',
+                  onPressed: () {},
                 ),
               ],
             ),
