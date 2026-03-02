@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:subscribtion_reminder/core/widgets/button.dart';
-import 'package:subscribtion_reminder/features/authentication/screen/sign_up.dart';
-import 'package:subscribtion_reminder/features/nav_bar/view/nav_.dart';
+import 'package:subscribtion_reminder/features/authentication/screen/sign_in.dart';
 
 import 'package:subscribtion_reminder/core/theme/app_colors.dart';
 import 'package:subscribtion_reminder/core/theme/app_text_theme.dart';
@@ -37,7 +36,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 onTap: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => const SignUp()),
+                    MaterialPageRoute(builder: (context) => const SignIn()),
                   );
                 },
                 child: Text(
@@ -100,7 +99,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             onPressed: () {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const SignUp()),
+                MaterialPageRoute(builder: (context) => const SignIn()),
               );
             },
             color: AppColors.secondary,

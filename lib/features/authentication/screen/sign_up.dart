@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:subscribtion_reminder/core/theme/app_text_theme.dart';
 import 'package:subscribtion_reminder/core/utils/text_validations.dart';
 import 'package:subscribtion_reminder/core/widgets/app_textfield.dart';
 import 'package:subscribtion_reminder/core/widgets/social_auth_button.dart';
+import 'package:subscribtion_reminder/features/authentication/logic/authentication_provider.dart';
 import 'package:subscribtion_reminder/features/authentication/screen/sign_in.dart';
 
 class SignUp extends StatefulWidget {
@@ -16,239 +18,266 @@ class SignUp extends StatefulWidget {
 
 class _SignUpState extends State<SignUp> {
   bool passwordVisible = false;
+  bool confirmPasswordVisible = false;
   final _formKey = GlobalKey<FormState>();
+  TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 237, 240, 246),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(15),
-          child: SafeArea(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              // crossAxisAlignment: CrossAxisAlignment.center,
-              // mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Container(
-                  height: 110,
-                  width: 140,
-                  decoration: BoxDecoration(
-                    color: const Color(0XFFFEFEFE),
-                    borderRadius: BorderRadius.all(Radius.circular(25)),
-                  ),
-                  child: Image.asset('assets/img/calendar.png', height: 110),
-                ),
-
-                SizedBox(height: 8),
-                Text('Sign Up', style: headline2),
-                SizedBox(height: 12),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Color(0XFFFEFEFE),
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      left: 20,
-                      right: 20,
-                      top: 30,
-                      bottom: 30,
-                    ),
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        spacing: 5,
-                        children: [
-                          AppTextField(
-                            bgColor: const Color(0XFFF4F6F9),
-                            controller: emailController,
-                            prefixIcon: const Icon(Icons.person_outline),
-
-                            hintText: "John Doe",
-                            hintColor: Colors.black,
-                            hintFontSize: 17,
-                            validator: (value) {
-                              if (!TextValidation.isEmailValid(value)) {
-                                return "Please provide a valid email";
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(height: 7),
-                          AppTextField(
-                            bgColor: const Color(0XFFF4F6F9),
-                            controller: emailController,
-                            prefixIcon: const Icon(Icons.email_outlined),
-
-                            hintText: "john.doe@gmail.com",
-                            hintColor: Colors.black,
-                            hintFontSize: 17,
-                            validator: (value) {
-                              if (!TextValidation.isEmailValid(value)) {
-                                return "Please provide a valid email";
-                              }
-                              return null;
-                            },
-                          ),
-                          SizedBox(height: 7),
-                          AppTextField(
-                            controller: passwordController,
-                            bgColor: const Color(0XFFF4F6F9),
-
-                            obscureText: !passwordVisible,
-                            prefixIcon: const Icon(Icons.lock_outline),
-                            suffixIcon: GestureDetector(
-                              onTap: () => setState(
-                                () => passwordVisible = !passwordVisible,
-                              ),
-                              child: Icon(
-                                passwordVisible
-                                    ? Icons.visibility_off_outlined
-                                    : Icons.visibility_outlined,
-                              ),
-                            ),
-                            hintText: "Password",
-                            hintFontSize: 17,
-                            hintColor: Colors.black,
-                            validator: (value) {
-                              if (value == null || value.length < 6) {
-                                return "Please provide a complete password";
-                              }
-
-                              return null;
-                            },
-                          ),
-                          SizedBox(height: 7),
-                          AppTextField(
-                            controller: passwordController,
-                            bgColor: const Color(0XFFF4F6F9),
-
-                            obscureText: !passwordVisible,
-                            prefixIcon: const Icon(Icons.lock_outline),
-                            suffixIcon: GestureDetector(
-                              onTap: () => setState(
-                                () => passwordVisible = !passwordVisible,
-                              ),
-                              child: Icon(
-                                passwordVisible
-                                    ? Icons.visibility_off_outlined
-                                    : Icons.visibility_outlined,
-                              ),
-                            ),
-                            hintText: "Confirm Password",
-                            hintFontSize: 17,
-                            hintColor: Colors.black,
-                            validator: (value) {
-                              if (value == null || value.length < 6) {
-                                return "Please provide a complete password";
-                              }
-                              if (value != passwordController.text) {
-                                return "Passwords do not match";
-                              }
-
-                              return null;
-                            },
-                          ),
-                          SizedBox(height: 27),
-                          GestureDetector(
-                            child: Container(
-                              height: 55,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: const Color.fromARGB(255, 4, 0, 255),
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(20),
-                                ),
-                              ),
-                              child: Center(
-                                child: Text(
-                                  'Login',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontFamily: 'Montserrat',
-                                    fontWeight: FontWeight.w400,
-
-                                    fontStyle: FontStyle.normal,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                              ),
-                            ),
-                          ),
-                          SizedBox(height: 17),
-                          Text(
-                            "Forgot Password?",
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 4, 0, 255),
-                              fontSize: 15,
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.w400,
-
-                              fontStyle: FontStyle.normal,
-                            ),
-                          ),
-                        ],
+      body: Consumer<AuthenticationProvider>(
+        builder: (context, state, _) {
+          return SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.all(15),
+              child: SafeArea(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  // crossAxisAlignment: CrossAxisAlignment.center,
+                  // mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 110,
+                      width: 140,
+                      decoration: BoxDecoration(
+                        color: const Color(0XFFFEFEFE),
+                        borderRadius: BorderRadius.all(Radius.circular(25)),
+                      ),
+                      child: Image.asset(
+                        'assets/img/calendar.png',
+                        height: 110,
                       ),
                     ),
-                  ),
-                ),
-                SizedBox(height: 17),
-                RichText(
-                  text: TextSpan(
-                    text: "Already have an account? ",
-                    style: TextStyle(
-                      color: const Color.fromARGB(255, 0, 0, 0),
-                      fontSize: 15,
-                      fontFamily: 'Montserrat',
-                      fontWeight: FontWeight.w400,
 
-                      fontStyle: FontStyle.normal,
+                    SizedBox(height: 8),
+                    Text('Sign Up', style: headline2),
+                    SizedBox(height: 12),
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Color(0XFFFEFEFE),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                          left: 20,
+                          right: 20,
+                          top: 30,
+                          bottom: 30,
+                        ),
+                        child: Form(
+                          key: _formKey,
+                          child: Column(
+                            spacing: 5,
+                            children: [
+                              AppTextField(
+                                bgColor: const Color(0XFFF4F6F9),
+                                controller: nameController,
+                                prefixIcon: const Icon(Icons.person_outline),
+                                hintText: "John Doe",
+                                hintColor: Colors.black,
+                                hintFontSize: 17,
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return "Please enter your name";
+                                  }
+
+                                  if (value.trim().length < 3) {
+                                    return "Name must be at least 3 characters";
+                                  }
+
+                                  return null;
+                                },
+                              ),
+                              SizedBox(height: 7),
+                              AppTextField(
+                                bgColor: const Color(0XFFF4F6F9),
+                                controller: emailController,
+                                prefixIcon: const Icon(Icons.email_outlined),
+
+                                hintText: "john.doe@gmail.com",
+                                hintColor: Colors.black,
+                                hintFontSize: 17,
+                                validator: (value) {
+                                  if (!TextValidation.isEmailValid(value)) {
+                                    return "Please provide a valid email";
+                                  }
+                                  return null;
+                                },
+                              ),
+                              SizedBox(height: 7),
+                              AppTextField(
+                                controller: passwordController,
+                                bgColor: const Color(0XFFF4F6F9),
+
+                                obscureText: !passwordVisible,
+                                prefixIcon: const Icon(Icons.lock_outline),
+                                suffixIcon: GestureDetector(
+                                  onTap: () => setState(
+                                    () => passwordVisible = !passwordVisible,
+                                  ),
+                                  child: Icon(
+                                    passwordVisible
+                                        ? Icons.visibility_off_outlined
+                                        : Icons.visibility_outlined,
+                                  ),
+                                ),
+                                hintText: "Password",
+                                hintFontSize: 17,
+                                hintColor: Colors.black,
+                                validator: (value) {
+                                  if (value == null || value.length < 6) {
+                                    return "Please provide a complete password";
+                                  }
+
+                                  return null;
+                                },
+                              ),
+                              SizedBox(height: 7),
+                              AppTextField(
+                                controller: confirmPasswordController,
+                                bgColor: const Color(0XFFF4F6F9),
+
+                                obscureText: !confirmPasswordVisible,
+                                prefixIcon: const Icon(Icons.lock_outline),
+                                suffixIcon: GestureDetector(
+                                  onTap: () => setState(
+                                    () => confirmPasswordVisible =
+                                        !confirmPasswordVisible,
+                                  ),
+                                  child: Icon(
+                                    confirmPasswordVisible
+                                        ? Icons.visibility_off_outlined
+                                        : Icons.visibility_outlined,
+                                  ),
+                                ),
+                                hintText: "Confirm Password",
+                                hintFontSize: 17,
+                                hintColor: Colors.black,
+                                validator: (value) {
+                                  if (value == null || value.length < 6) {
+                                    return "Please provide a complete password";
+                                  }
+                                  if (value != passwordController.text) {
+                                    return "Passwords do not match";
+                                  }
+
+                                  return null;
+                                },
+                              ),
+                              SizedBox(height: 27),
+                              GestureDetector(
+                                onTap: () {
+                                  if (_formKey.currentState!.validate()) {
+                                    state.signUp(
+                                      emailController.text,
+                                      passwordController.text,
+                                      nameController.text,
+                                      context,
+                                    );
+                                  }
+                                },
+                                child: Container(
+                                  height: 55,
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: const Color.fromARGB(255, 4, 0, 255),
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(20),
+                                    ),
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      'Sign Up',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 20,
+                                        fontFamily: 'Montserrat',
+                                        fontWeight: FontWeight.w400,
+
+                                        fontStyle: FontStyle.normal,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              SizedBox(height: 17),
+                              Text(
+                                "Forgot Password?",
+                                style: TextStyle(
+                                  color: Color.fromARGB(255, 4, 0, 255),
+                                  fontSize: 15,
+                                  fontFamily: 'Montserrat',
+                                  fontWeight: FontWeight.w400,
+
+                                  fontStyle: FontStyle.normal,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     ),
-                    children: [
-                      TextSpan(
-                        text: "Sign In",
+                    SizedBox(height: 17),
+                    RichText(
+                      text: TextSpan(
+                        text: "Already have an account? ",
                         style: TextStyle(
-                          color: const Color.fromARGB(255, 4, 0, 255),
+                          color: const Color.fromARGB(255, 0, 0, 0),
                           fontSize: 15,
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.w400,
 
                           fontStyle: FontStyle.normal,
                         ),
-                        recognizer: TapGestureRecognizer()
-                          ..onTap = () {
-                            // Navigate here
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => SignIn()),
-                            );
-                          },
+                        children: [
+                          TextSpan(
+                            text: "Sign In",
+                            style: TextStyle(
+                              color: const Color.fromARGB(255, 4, 0, 255),
+                              fontSize: 15,
+                              fontFamily: 'Montserrat',
+                              fontWeight: FontWeight.w400,
+
+                              fontStyle: FontStyle.normal,
+                            ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                // Navigate here
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SignIn(),
+                                  ),
+                                );
+                              },
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                ),
+                    ),
 
-                SizedBox(height: 17),
+                    SizedBox(height: 17),
 
-                socialAuthButton(
-                  text: "Continue with Google",
-                  imagePath: 'assets/icons/google.png',
-                  onPressed: () {},
+                    socialAuthButton(
+                      text: "Continue with Google",
+                      imagePath: 'assets/icons/google.png',
+                      onPressed: () {},
+                    ),
+                    SizedBox(height: 12),
+                    socialAuthButton(
+                      text: "Continue with Apple",
+                      imagePath: 'assets/icons/apple-logo.png',
+                      onPressed: () {},
+                    ),
+                  ],
                 ),
-                SizedBox(height: 12),
-                socialAuthButton(
-                  text: "Continue with Apple",
-                  imagePath: 'assets/icons/apple-logo.png',
-                  onPressed: () {},
-                ),
-              ],
+              ),
             ),
-          ),
-        ),
+          );
+        },
       ),
     );
   }
