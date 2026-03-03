@@ -22,6 +22,7 @@ class SubscriptionProvider extends ChangeNotifier {
       await supabase
           .from('subscriptions')
           .insert({
+            'user_id': supabase.auth.currentUser?.id,
             'service_name': name,
             'category': selectedCategory,
             'amount': amount,

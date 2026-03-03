@@ -529,3 +529,22 @@ class _AddSubscriptionScreenState extends State<AddSubscriptionScreen> {
     super.dispose();
   }
 }
+
+
+Widget ListofSubscriptions() {
+  return Container(
+    height: 200,
+    child: ListView.builder(
+      itemCount: 5, // Replace with your actual subscription count
+      itemBuilder: (context, index) {
+        return ListTile(
+          leading: Icon(Icons.subscriptions),
+          title: Text('Subscription ${index + 1}'),
+          subtitle: Text('Next billing date: 12/31/2024'),
+          trailing: Text('\$9.99'),
+        );
+      },
+    ),
+  );
+}
+

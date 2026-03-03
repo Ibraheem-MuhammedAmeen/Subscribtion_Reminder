@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:subscribtion_reminder/core/global.dart';
 import 'package:subscribtion_reminder/features/home/view/home_screen.dart';
 import 'package:subscribtion_reminder/features/nav_bar/view/nav_.dart';
@@ -7,6 +8,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthenticationProvider extends ChangeNotifier {
   String? currentUser;
+  String? userId;
 
   final SupabaseClient _supabaseClient = Supabase.instance.client;
   // This class will handle all the authentication logic, such as signing in, signing up, and signing out.
@@ -17,6 +19,7 @@ class AuthenticationProvider extends ChangeNotifier {
     String name,
     BuildContext context,
   ) async {
+    final sharedPreferences = await SharedPreferences.getInstance();
     try {
       loadingCircleIndicator(context);
 
@@ -25,6 +28,13 @@ class AuthenticationProvider extends ChangeNotifier {
         password: password,
         data: {'name': name.trim()},
       );
+
+      if (response.session != null) {
+        await sharedPreferences.setString(
+          "user_token",
+          response.session?.accessToken ?? "",
+        );
+      }
 
       Navigator.of(context, rootNavigator: true).pop(); // close loader
       Navigator.pushReplacement(
@@ -58,6 +68,7 @@ class AuthenticationProvider extends ChangeNotifier {
     String password,
     BuildContext context,
   ) async {
+    final sharedPreferences = await SharedPreferences.getInstance();
     try {
       loadingCircleIndicator(context);
 
@@ -65,6 +76,13 @@ class AuthenticationProvider extends ChangeNotifier {
         email: email,
         password: password,
       );
+
+      if (response.session != null) {
+        await sharedPreferences.setString(
+          "user_token",
+          response.session?.accessToken ?? "",
+        );
+      }
 
       currentUser = email;
       notifyListeners();
@@ -106,6 +124,14 @@ class AuthenticationProvider extends ChangeNotifier {
     final user = _supabaseClient.auth.currentUser;
     if (user != null) {
       currentUser = user.email;
+      notifyListeners();
+    }
+  }
+
+  Future<void> getUserId() async {
+    final user = _supabaseClient.auth.currentUser;
+    if (user != null) {
+      userId = user.id;
       notifyListeners();
     }
   }
