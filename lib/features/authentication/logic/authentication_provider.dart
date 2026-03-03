@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:subscribtion_reminder/core/global.dart';
 import 'package:subscribtion_reminder/features/home/view/home_screen.dart';
+import 'package:subscribtion_reminder/features/nav_bar/view/nav_.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthenticationProvider extends ChangeNotifier {
@@ -52,25 +53,48 @@ class AuthenticationProvider extends ChangeNotifier {
     }
   }
 
-  Future<AuthResponse> signIn(String email, String password, BuildContext context) async {
+  Future<AuthResponse?> signIn(
+    String email,
+    String password,
+    BuildContext context,
+  ) async {
     try {
       loadingCircleIndicator(context);
+
       final response = await _supabaseClient.auth.signInWithPassword(
         email: email,
         password: password,
       );
-      
+
       currentUser = email;
       notifyListeners();
 
       Navigator.of(context, rootNavigator: true).pop(); // close loader
+
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
+        MaterialPageRoute(builder: (_) => const MainScreen()),
       );
+
       return response;
     } on AuthException catch (e) {
-      throw Exception(e.message);
+      Navigator.of(context, rootNavigator: true).pop(); // close loader on error
+
+      if (e.statusCode == 429) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+              "Too many requests. Please wait a few minutes and try again.",
+            ),
+          ),
+        );
+      } else {
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(e.message)));
+      }
+
+      return null;
     }
   }
 

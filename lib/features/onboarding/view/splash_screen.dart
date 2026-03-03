@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:subscribtion_reminder/features/home/view/home_screen.dart';
+import 'package:subscribtion_reminder/features/nav_bar/view/nav_.dart';
 import 'package:subscribtion_reminder/features/onboarding/view/onboarding.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -102,7 +102,7 @@ class _SplashScreenState extends State<SplashScreen> {
       context,
       MaterialPageRoute(
         builder: (context) =>
-            token == null ? const OnboardingScreen() : const HomeScreen(),
+            token == null ? const OnboardingScreen() : const MainScreen(),
       ),
       (route) => false,
     );
