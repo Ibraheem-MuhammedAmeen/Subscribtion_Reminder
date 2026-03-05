@@ -231,6 +231,7 @@ class HomeScreen extends StatelessWidget {
         ),
 
         ListView.builder(
+          shrinkWrap: true,
           itemCount: 5, // Replace with actual subscription count
           itemBuilder: (context, index) {
             return ListTile(
