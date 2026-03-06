@@ -23,7 +23,14 @@ class _HomeScreenState extends State<HomeScreen> {
       () => Provider.of<HomeScreenProvider>(
         context,
         listen: false,
-      ).getSubscriptions(),
+      ).getSubscriptions(context),
+    );
+
+    Future.microtask(
+      () => Provider.of<HomeScreenProvider>(
+        context,
+        listen: false,
+      ).getTotalAmount(),
     );
     super.initState();
   }
@@ -40,6 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<HomeScreenProvider>(context);
     return Scaffold(
       backgroundColor: const Color(0XFFF6F9FC),
       appBar: AppBar(
@@ -49,14 +57,35 @@ class _HomeScreenState extends State<HomeScreen> {
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
         actions: [
-          IconButton(
-            icon: const Icon(
-              Icons.search,
-              color: Color.fromARGB(255, 121, 123, 124),
-            ),
-            onPressed: () {
-              // Handle profile icon tap
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddSubscriptionScreen(),
+                ),
+              );
             },
+            child: Container(
+              height: 53,
+              width: 50,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: const Color.fromARGB(
+                  255,
+                  180,
+                  205,
+                  228,
+                ).withOpacity(0.4),
+              ),
+              child: const Center(
+                child: Icon(
+                  Icons.add,
+                  size: 28,
+                  color: Color.fromARGB(255, 0, 47, 255),
+                ),
+              ),
+            ),
           ),
         ],
         leading: Container(
@@ -76,7 +105,11 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.all(20),
-          child: Center(child: subscriptionList(context)),
+          child: Center(
+            child: provider.subscriptions.isEmpty
+                ? emptySubscriptions(context)
+                : subscriptionList(context),
+          ),
         ),
       ),
     );
@@ -187,7 +220,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: "\$142.50",
+                        text: provider.totalAmount.toString(),
                         style: TextStyle(
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.bold,
