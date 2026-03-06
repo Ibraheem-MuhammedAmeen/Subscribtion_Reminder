@@ -1,8 +1,13 @@
+import 'dart:math';
+
 import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:subscribtion_reminder/features/subscription_func/view/add_subscription.dart';
+import 'package:provider/provider.dart';
+
 import 'package:subscribtion_reminder/core/theme/app_text_theme.dart';
+import 'package:subscribtion_reminder/features/home/logic/home_screen_provider.dart';
+import 'package:subscribtion_reminder/features/subscription_func/view/add_subscription.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -12,8 +17,27 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    Future.microtask(
+      () => Provider.of<HomeScreenProvider>(
+        context,
+        listen: false,
+      ).getSubscriptions(),
+    );
+    super.initState();
+  }
+
   int selectedValue = 1;
   bool isSelected = false;
+  var colorList = [
+    Colors.red,
+    Colors.blue,
+    Colors.amber,
+    Colors.black,
+    Colors.green,
+    Colors.deepPurple,
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,6 +139,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget subscriptionList(BuildContext context) {
+    final provider = Provider.of<HomeScreenProvider>(context);
     // This will be the list of subscriptions, for now it's just a placeholder
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -271,8 +296,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ListView.separated(
           shrinkWrap: true,
 
-          itemCount: 2, // Replace with actual subscription count
+          itemCount: provider
+              .subscriptions
+              .length, // Replace with actual subscription count
           itemBuilder: (context, index) {
+            final subscription = provider.subscriptions[index];
             return Container(
               width: double.infinity,
               height: 100,
@@ -290,7 +318,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       width: 55,
                       height: 55,
                       decoration: BoxDecoration(
-                        color: Colors.black,
+                        color: colorList[Random().nextInt(colorList.length)],
                         borderRadius: BorderRadius.circular(15),
                       ),
                     ),
@@ -301,7 +329,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       spacing: 8,
                       children: [
                         Text(
-                          'Netflix',
+                          subscription['service_name'] ?? '',
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 20,
@@ -310,7 +338,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         Text(
-                          'Next: Oct 12 . Standard',
+                          "Next: ${subscription['next_billing_date']} ",
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 15,
@@ -327,7 +355,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '\$15.49',
+                          "\$${subscription['amount']}",
                           style: TextStyle(
                             fontFamily: 'Montserrat',
                             fontSize: 20,

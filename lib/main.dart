@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:subscribtion_reminder/features/authentication/logic/authentication_provider.dart';
 import 'package:subscribtion_reminder/core/theme/app_theme.dart';
+import 'package:subscribtion_reminder/features/home/logic/home_screen_provider.dart';
 import 'package:subscribtion_reminder/features/onboarding/view/splash_screen.dart';
 import 'package:subscribtion_reminder/features/subscription_func/logic/subscription_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
         // auth provider
         ChangeNotifierProvider(create: (context) => SubscriptionProvider()),
         ChangeNotifierProvider(create: (context) => AuthenticationProvider()),
+        ChangeNotifierProvider(create: (context) => HomeScreenProvider()),
       ],
 
       child: MaterialApp(
