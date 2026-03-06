@@ -1,10 +1,19 @@
+import 'package:custom_sliding_segmented_control/custom_sliding_segmented_control.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:subscribtion_reminder/features/subscription_func/view/add_subscription.dart';
 import 'package:subscribtion_reminder/core/theme/app_text_theme.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int selectedValue = 1;
+  bool isSelected = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -221,26 +230,129 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
 
-        SizedBox(height: 10),
+        SizedBox(height: 15),
 
         Row(
           children: [
-            Text('Active Subsciption'),
-            Container(height: 10, width: 20, child: Text('Monthly')),
+            Text(
+              'Active Subsciption',
+              style: TextStyle(
+                fontFamily: 'Montserrat',
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Spacer(),
+
+            CustomSlidingSegmentedControl<int>(
+              initialValue: selectedValue,
+              children: const {1: Text('Monthly'), 2: Text('Yearly')},
+              decoration: BoxDecoration(
+                color: CupertinoColors.lightBackgroundGray,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              thumbDecoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(6),
+              ),
+              duration: Duration(milliseconds: 300),
+              curve: Curves.easeInToLinear,
+              onValueChanged: (value) {
+                setState(() {
+                  selectedValue = value!;
+                });
+              },
+            ),
           ],
         ),
 
-        ListView.builder(
+        SizedBox(height: 15),
+
+        ListView.separated(
           shrinkWrap: true,
-          itemCount: 5, // Replace with actual subscription count
+
+          itemCount: 2, // Replace with actual subscription count
           itemBuilder: (context, index) {
-            return ListTile(
-              leading: Icon(Icons.subscriptions),
-              title: Text('Subscription ${index + 1}'),
-              subtitle: Text('Next billing date: 2024-07-01'),
-              trailing: Text('\$9.99'),
+            return Container(
+              width: double.infinity,
+              height: 100,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Padding(
+                padding: EdgeInsetsGeometry.all(15),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+
+                  children: [
+                    Container(
+                      width: 55,
+                      height: 55,
+                      decoration: BoxDecoration(
+                        color: Colors.black,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                    ),
+                    Spacer(),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      spacing: 8,
+                      children: [
+                        Text(
+                          'Netflix',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontSize: 20,
+                            fontWeight: FontWeight.w800,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        Text(
+                          'Next: Oct 12 . Standard',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+
+                    Spacer(),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '\$15.49',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontSize: 20,
+                            fontWeight: FontWeight.w800,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                        Text(
+                          'MONTHLY',
+                          style: TextStyle(
+                            fontFamily: 'Montserrat',
+                            fontSize: 17,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w600,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             );
           },
+          separatorBuilder: (context, index) => SizedBox(height: 12),
         ),
       ],
     );

@@ -41,6 +41,7 @@ dependencies:
   provider: ^6.1.5+1
   supabase_flutter: ^2.12.0
   shared_preferences: ^2.5.3
+  custom_sliding_segmented_control: ^1.8.5
 
 dev_dependencies:
   flutter_test:
