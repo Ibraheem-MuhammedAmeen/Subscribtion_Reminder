@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:subscribtion_reminder/core/global.dart';
+import 'package:subscribtion_reminder/features/home/logic/home_screen_provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SubscriptionProvider extends ChangeNotifier {
@@ -32,7 +34,13 @@ class SubscriptionProvider extends ChangeNotifier {
           })
           .timeout(const Duration(seconds: 10));
 
-      print('DEBUG: Insert successful!');
+      if (context.mounted) {
+      await Provider.of<HomeScreenProvider>(
+        context,
+        listen: false,
+      ).getSubscriptions(context);
+    }
+
 
       if (context.mounted) {
         Navigator.of(context).pop(); // Close loader

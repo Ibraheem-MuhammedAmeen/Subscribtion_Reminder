@@ -25,13 +25,8 @@ class _HomeScreenState extends State<HomeScreen> {
         listen: false,
       ).getSubscriptions(context),
     );
+    
 
-    Future.microtask(
-      () => Provider.of<HomeScreenProvider>(
-        context,
-        listen: false,
-      ).getTotalAmount(),
-    );
     super.initState();
   }
 
@@ -220,7 +215,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   text: TextSpan(
                     children: [
                       TextSpan(
-                        text: provider.totalAmount.toString(),
+                        text: "\$${provider.totalAmount!.toStringAsFixed(2)}",
                         style: TextStyle(
                           fontFamily: 'Montserrat',
                           fontWeight: FontWeight.bold,

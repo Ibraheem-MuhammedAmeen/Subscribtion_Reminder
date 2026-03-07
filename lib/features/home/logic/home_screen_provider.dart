@@ -43,6 +43,8 @@ class HomeScreenProvider extends ChangeNotifier {
 
       subscriptions = List<Map<String, dynamic>>.from(response);
 
+
+      getTotalAmount();
       notifyListeners();
 
       if (context.mounted) {
