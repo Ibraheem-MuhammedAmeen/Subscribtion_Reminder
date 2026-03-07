@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:subscribtion_reminder/core/theme/app_text_theme.dart';
 import 'package:subscribtion_reminder/features/home/logic/home_screen_provider.dart';
 import 'package:subscribtion_reminder/features/subscription_func/view/add_subscription.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,19 +20,25 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
+    super.initState();
+    loadData();
+  }
+
+  Future<void> loadData() async {
     Future.microtask(
       () => Provider.of<HomeScreenProvider>(
         context,
         listen: false,
       ).getSubscriptions(context),
     );
-    
 
-    super.initState();
+    // await Future.delayed(const Duration(seconds: 8));
   }
 
   int selectedValue = 1;
   bool isSelected = false;
+  final SupabaseClient _supabase = Supabase.instance.client;
+  late var user = _supabase.auth.currentUser;
   var colorList = [
     Colors.red,
     Colors.blue,
@@ -47,9 +54,28 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: const Color(0XFFF6F9FC),
       appBar: AppBar(
         centerTitle: true,
-        title: Text(
-          'SubTracker',
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Welcome back',
+              style: TextStyle(
+                color: Colors.grey,
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.w700,
+                fontSize: 18,
+              ),
+            ),
+            Text(
+              '${user?.email ?? 'No user logged in'}',
+              style: TextStyle(
+                color: const Color.fromARGB(255, 0, 0, 0),
+                fontFamily: 'Montserrat',
+                fontWeight: FontWeight.w800,
+                fontSize: 18,
+              ),
+            ),
+          ],
         ),
         actions: [
           GestureDetector(
@@ -101,7 +127,12 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Padding(
           padding: EdgeInsets.all(20),
           child: Center(
-            child: provider.subscriptions.isEmpty
+            child: provider.isLoading
+                ? SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.7,
+                    child: const Center(child: CircularProgressIndicator()),
+                  )
+                : provider.subscriptions.isEmpty
                 ? emptySubscriptions(context)
                 : subscriptionList(context),
           ),

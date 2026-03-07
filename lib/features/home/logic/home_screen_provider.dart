@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:subscribtion_reminder/core/global.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HomeScreenProvider extends ChangeNotifier {
@@ -8,6 +7,7 @@ class HomeScreenProvider extends ChangeNotifier {
 
   List<Map<String, dynamic>> subscriptions = [];
   double? totalAmount;
+  bool isLoading = true;
 
   Future<void> getTotalAmount() async {
     double sum = 0;
@@ -26,7 +26,10 @@ class HomeScreenProvider extends ChangeNotifier {
 
   Future<void> getSubscriptions(BuildContext context) async {
     try {
-      loadingCircleIndicator(context);
+      isLoading = true;
+      notifyListeners();
+
+      // loadingCircleIndicator(context);
 
       final user = _supabase.auth.currentUser;
 
@@ -43,19 +46,20 @@ class HomeScreenProvider extends ChangeNotifier {
 
       subscriptions = List<Map<String, dynamic>>.from(response);
 
-
       getTotalAmount();
+      isLoading = false;
+
       notifyListeners();
 
-      if (context.mounted) {
-        Navigator.of(context).pop();
-      }
+      // if (context.mounted) {
+      //   Navigator.of(context).pop();
+      // }
     } catch (e) {
       debugPrint('Error fetching subscriptions: $e');
 
-      if (context.mounted) {
-        Navigator.of(context).pop();
-      }
+      // if (context.mounted) {
+      //   Navigator.of(context).pop();
+      // }
     }
   }
 }
