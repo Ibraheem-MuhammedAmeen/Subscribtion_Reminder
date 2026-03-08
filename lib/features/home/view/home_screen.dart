@@ -316,38 +316,43 @@ class _HomeScreenState extends State<HomeScreen> {
 
         SizedBox(height: 15),
 
-        Row(
-          children: [
-            Text(
-              'Active Subsciption',
-              style: TextStyle(
-                fontFamily: 'Montserrat',
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+        Container(
+          width: double.infinity, // allow full width
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Active Subscription',
+                style: TextStyle(
+                  fontFamily: 'Montserrat',
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            Spacer(),
-
-            CustomSlidingSegmentedControl<int>(
-              initialValue: selectedValue,
-              children: const {1: Text('Monthly'), 2: Text('Yearly')},
-              decoration: BoxDecoration(
-                color: CupertinoColors.lightBackgroundGray,
-                borderRadius: BorderRadius.circular(8),
+              SizedBox(width: 16),
+              Expanded(
+                child: CustomSlidingSegmentedControl<int>(
+                  initialValue: selectedValue,
+                  children: const {1: Text('Monthly'), 2: Text('Yearly')},
+                  decoration: BoxDecoration(
+                    color: CupertinoColors.lightBackgroundGray,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  thumbDecoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(6),
+                  ),
+                  duration: Duration(milliseconds: 300),
+                  curve: Curves.easeInToLinear,
+                  onValueChanged: (value) {
+                    setState(() {
+                      selectedValue = value!;
+                    });
+                  },
+                ),
               ),
-              thumbDecoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(6),
-              ),
-              duration: Duration(milliseconds: 300),
-              curve: Curves.easeInToLinear,
-              onValueChanged: (value) {
-                setState(() {
-                  selectedValue = value!;
-                });
-              },
-            ),
-          ],
+            ],
+          ),
         ),
 
         SizedBox(height: 15),
