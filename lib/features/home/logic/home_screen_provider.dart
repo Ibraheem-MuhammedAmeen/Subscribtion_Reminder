@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:subscribtion_reminder/core/services/notification_services.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class HomeScreenProvider extends ChangeNotifier {
@@ -46,20 +47,39 @@ class HomeScreenProvider extends ChangeNotifier {
 
       subscriptions = List<Map<String, dynamic>>.from(response);
 
+
+      
       getTotalAmount();
+      checkSubscriptionExpiry(); // 🔔 check reminders
       isLoading = false;
 
       notifyListeners();
 
-      // if (context.mounted) {
-      //   Navigator.of(context).pop();
-      // }
+     
     } catch (e) {
       debugPrint('Error fetching subscriptions: $e');
 
-      // if (context.mounted) {
-      //   Navigator.of(context).pop();
-      // }
+     
+    }
+  }
+
+  void checkSubscriptionExpiry() {
+    DateTime now = DateTime.now();
+
+    for (var sub in subscriptions) {
+      if (sub['next_billing_date'] == null) continue;
+
+      DateTime endDate = DateTime.parse(sub['next_billing_date']);
+
+      int daysLeft = endDate.difference(now).inDays;
+
+      if (daysLeft == 3 || daysLeft == 2 || daysLeft == 1) {
+        NotificationService.showNotification(
+          id: sub['id'].hashCode,
+          title: "Subscription Ending Soon",
+          body: "${sub['name']} expires in $daysLeft day(s)",
+        );
+      }
     }
   }
 }

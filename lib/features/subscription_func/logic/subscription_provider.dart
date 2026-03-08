@@ -57,10 +57,5 @@ class SubscriptionProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> removeSubscription() async {}
-
-  void fetchSubscriptions() {
-    // Logic to fetch subscriptions from a database or API
-    // After fetching, call notifyListeners() to update the UI
-  }
+  
 }

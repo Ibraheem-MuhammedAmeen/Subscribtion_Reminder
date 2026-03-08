@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:subscribtion_reminder/core/services/notification_services.dart';
 import 'package:subscribtion_reminder/features/authentication/logic/authentication_provider.dart';
 import 'package:subscribtion_reminder/core/theme/app_theme.dart';
 import 'package:subscribtion_reminder/features/home/logic/home_screen_provider.dart';
@@ -13,6 +14,8 @@ void main() async {
     url: "https://xgednzkczcqoyihzzpll.supabase.co",
     anonKey: "sb_publishable_3oim2FmEVWw0nfT5zVwr5Q_dCJ-DhPc",
   );
+
+  await NotificationService.init();
   runApp(const MyApp());
 }
 
